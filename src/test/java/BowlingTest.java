@@ -12,8 +12,7 @@ public class BowlingTest {
     @Test
     public void eachFrameHas2Opportunities(){
         Bowling game = new Bowling();
-        Frame[] frames = game.getFrames();
-        for (Frame frame : frames) {
+        for (Frame frame : game.getFrames()) {
             Assert.assertEquals(2, frame.getOportunities().length);
         }
     }

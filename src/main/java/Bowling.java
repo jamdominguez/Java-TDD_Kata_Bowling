@@ -1,7 +1,5 @@
-import java.util.Collection;
-
 public class Bowling {
-    public Object[] getFrames() {
-        return new Object[10];
+    public Frame[] getFrames() {
+        return new Frame[10];
     }
 }

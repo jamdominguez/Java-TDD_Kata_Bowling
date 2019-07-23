@@ -19,7 +19,7 @@ public class Bowling {
      */
     public int score() throws Exception {
         int score = 0;
-        for (int i = 0; i < FRAMES_NUMBER ; i++) score += this.frames[i].score();
+        for (int i = 0; i < FRAMES_NUMBER ; i++) score += score(i);
         return score;
     }
 
@@ -29,8 +29,11 @@ public class Bowling {
      * @throws Exception
      */
     public int score(int frameIndex) throws Exception {
-        if (frameIndex == FRAMES_NUMBER - 1) return this.frames[frameIndex].score() + getExtraRoll().score();
-        else return this.frames[frameIndex].score();
+        if (frameIndex == FRAMES_NUMBER - 1) {
+            return this.frames[frameIndex].score() + getExtraRoll().score();
+        } else {
+            return this.frames[frameIndex].score();
+        }
     }
 
     public Roll getExtraRoll() {

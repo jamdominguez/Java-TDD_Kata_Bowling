@@ -33,11 +33,12 @@ public class RollTest {
         }
     }
 
+    @Test
     public void scoreIfBonus() throws Exception {
         Roll roll = new Roll();
         for (int i = 0; i < Frame.MAX_PINS; i++) {
-            roll.roll(i * 2, false); //bonus generate de double of pins dropped
-            Assert.assertEquals(roll.getPinsDropped(), roll.score());
+            roll.roll(i , true); //bonus generate de double of pins dropped
+            Assert.assertEquals(roll.getPinsDropped() * 2, roll.score());
         }
     }
 }

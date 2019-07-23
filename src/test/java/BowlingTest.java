@@ -71,4 +71,32 @@ public class BowlingTest {
         //The second frame: first roll 4 + 4 (by bonus), second roll 3 = 11 points
         Assert.assertEquals(11, frames[1].score());
     }
+
+    @Test
+    public void strikeGenerateBonusToTheTwoNextFrameRoll() throws Exception {
+        Bowling game = new Bowling();
+        Frame[] frames = game.getFrames();
+        frames[0].getRolls()[0].roll(10, false);
+        frames[0].getRolls()[1].roll(0, false);
+        //Check spare in frame 0
+        Assert.assertEquals(true, frames[0].isStrike());
+
+        //The game is who know if bonus exist
+        frames[1].getRolls()[0].roll(4, true);
+        frames[1].getRolls()[1].roll(3, true);
+        //The second frame: first roll 4 + 4 (by bonus), second roll 3 + 3 (by bonus) = 14 points
+        Assert.assertEquals(14, frames[1].score());
+    }
+
+    @Test
+    public void bonusInLastFrameLetAExtraRoll() throws Exception {
+        Bowling game = new Bowling();
+        Frame[] frames = game.getFrames();
+        //Strike
+        frames[9].getRolls()[0].roll(10, false);
+        frames[9].getRolls()[1].roll(0, false);
+        game.getExtraRoll().roll(7, true);
+        //The last frame will be frame score plus extraroll;
+        Assert.assertEquals(24, game.score(9));
+    }
 }

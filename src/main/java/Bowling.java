@@ -5,7 +5,7 @@ public class Bowling {
 
     public Bowling(){
         this.frames = new Frame[FRAMES_NUMBER];
-        for (int i = 0; i < 10; i++) frames[i] = new Frame();
+        for (int i = 0; i < FRAMES_NUMBER; i++) frames[i] = new Frame();
     }
 
     public Frame[] getFrames() {

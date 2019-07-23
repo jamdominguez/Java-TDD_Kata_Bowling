@@ -1,5 +1,14 @@
 public class Frame {
+
+    public static final int OPORTUNITIES_NUMBER = 2;
+    private final Oportunity[] oportunities;
+
+    public Frame(){
+        this.oportunities = new Oportunity[OPORTUNITIES_NUMBER];
+        for (int i = 0; i < OPORTUNITIES_NUMBER; i++) oportunities[i] = new Oportunity();
+    }
+
     public Oportunity[] getOportunities() {
-        return new Oportunity[2];
+        return this.oportunities;
     }
 }

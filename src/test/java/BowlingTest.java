@@ -36,26 +36,39 @@ public class BowlingTest {
         Bowling game = new Bowling();
         Frame frame = game.getFrames()[0];
         for (int i = -1; i > -10; i--) {
-            frame.getRolls()[0].setScore(i, 0);
-            frame.getRolls()[1].setScore(i - 1, 0);
-            Assert.assertEquals(0, frame.getScore());
+            frame.getRolls()[0].roll(i, false);
+            frame.getRolls()[1].roll(i - 1, false);
+            Assert.assertEquals(0, frame.score());
         }
     }
 
     @Test
     public void totalScoreIsThePlusOfAllFramesScore() throws Exception {
         Bowling game = new Bowling();
-        for (int scoreByOport = 0; scoreByOport <= 10; scoreByOport++) {
+        for (int pins = 0; pins <= Frame.MAX_PINS; pins++) {
             for (Frame frame : game.getFrames()) {
                 for (Roll roll : frame.getRolls()) {
-                    roll.setScore(scoreByOport, 0);
+                    roll.roll(pins, false);
                 }
             }
             // 1 point x 2 opportunities x 10 frames = 20 points
-            Assert.assertEquals(Bowling.FRAMES_NUMBER * Frame.OPORTUNITIES_NUMBER * scoreByOport, game.getScore());
+            Assert.assertEquals(Bowling.FRAMES_NUMBER * Frame.OPORTUNITIES_NUMBER * pins, game.score());
         }
     }
 
+    @Test
+    public void spareGenerateBonusToTheNextFrameRoll() throws Exception {
+        Bowling game = new Bowling();
+        Frame[] frames = game.getFrames();
+        frames[0].getRolls()[0].roll(5, false);
+        frames[0].getRolls()[1].roll(5, false);
+        //Check spare in frame 0
+        Assert.assertEquals(true, frames[0].isSPare());
 
-
+        //The game is who know if bonus exist
+        frames[1].getRolls()[0].roll(4, true);
+        frames[1].getRolls()[1].roll(3, false);
+        //The second frame: first roll 4 + 4 (by bonus), second roll 3 = 11 points
+        Assert.assertEquals(11, frames[1].score());
+    }
 }

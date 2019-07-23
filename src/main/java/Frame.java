@@ -13,9 +13,9 @@ public class Frame {
         return this.rolls;
     }
 
-    public int getScore() {
+    public int score() throws Exception {
         int score = 0;
-        for (Roll roll : this.rolls) score += roll.getScore();
+        for (Roll roll : this.rolls) score += roll.score();
         return score;
     }
 

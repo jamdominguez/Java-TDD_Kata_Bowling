@@ -1,25 +1,31 @@
+import static javax.swing.text.html.HTML.Tag.STRIKE;
+
 public class Roll {
 
     private int score;
     private int pinsDropped;
+    private int bonus;
+    private boolean existBonus;
 
-    public int getScore() {
+    public int score() throws Exception {
+        this.score = this.pinsDropped + this.bonus;
         return this.score;
     }
 
-    public void setScore(int pinsDropped, int bonus) throws Exception {
-        if (pinsDropped < 0) throw new Exception("Bonus can't be negative");
-        this.score = pinsDropped + bonus;
-    }
-
-    public void roll(int pinsDropped) throws Exception {
+    public void roll(int pinsDropped, boolean existBonus) throws Exception {
         if (pinsDropped < 0) throw new Exception("Pins dropped can't be negative");
-        if (pinsDropped > 10) throw new Exception("Not is possible drop more than 10 pins in a roll");
-        else this.pinsDropped = pinsDropped;
+        if (pinsDropped > Frame.MAX_PINS) throw new Exception("Not is possible drop more than 10 pins in a roll");
+        if (existBonus) this.bonus = pinsDropped;
+        this.existBonus = existBonus;
+        this.pinsDropped = pinsDropped;
+        score();
     }
 
     public int getPinsDropped() {
         return this.pinsDropped;
     }
 
+    public int getBonus() {
+        return bonus;
+    }
 }

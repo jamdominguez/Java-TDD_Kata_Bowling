@@ -6,31 +6,38 @@ public class RollTest {
     @Test (expected = Exception.class)
     public void pinsMaxDroppedAre10() throws Exception {
         Roll roll = new Roll();
-        roll.roll(11);
+        roll.roll(11, false);
         Assert.assertEquals("", roll.getPinsDropped());
     }
 
     @Test (expected = Exception.class)
     public void pinsDroppedCantBeNegative() throws Exception {
         Roll roll = new Roll();
-        roll.roll(-11);
+        roll.roll(-11, false);
         Assert.assertEquals("", roll.getPinsDropped());
     }
 
     @Test
     public void rollScoreIsPinsDroppedPlusBonus() throws Exception {
         Roll roll = new Roll();
-        roll.setScore(5,6);
-        Assert.assertEquals(11, roll.getScore());
+        roll.roll(5, true); //bonus generate de double of pins dropped
+        Assert.assertEquals(10, roll.score());
     }
 
     @Test
     public void scoreIfNoBonus() throws Exception {
         Roll roll = new Roll();
         for (int i = 0; i < Frame.MAX_PINS; i++) {
-            roll.roll(i);
-            roll.setScore(roll.getPinsDropped(), 0);
-            Assert.assertEquals(roll.getPinsDropped(), roll.getScore());
+            roll.roll(i, false);
+            Assert.assertEquals(roll.getPinsDropped(), roll.score());
+        }
+    }
+
+    public void scoreIfBonus() throws Exception {
+        Roll roll = new Roll();
+        for (int i = 0; i < Frame.MAX_PINS; i++) {
+            roll.roll(i * 2, false); //bonus generate de double of pins dropped
+            Assert.assertEquals(roll.getPinsDropped(), roll.score());
         }
     }
 }

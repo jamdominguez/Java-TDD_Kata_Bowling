@@ -12,9 +12,9 @@ public class Bowling {
         return this.frames;
     }
 
-    public int getScore() {
+    public int score() throws Exception {
         int score = 0;
-        for (Frame frame : this.frames) score += frame.getScore();
+        for (Frame frame : this.frames) score += frame.score();
         return score;
     }
 }

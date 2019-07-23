@@ -9,6 +9,12 @@ public class Bowling {
     }
 
     public Frame[] getFrames() {
-        return frames;
+        return this.frames;
+    }
+
+    public int getScore() {
+        int score = 0;
+        for (Frame frame : this.frames) score += frame.getScore();
+        return score;
     }
 }

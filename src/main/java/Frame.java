@@ -1,18 +1,20 @@
 public class Frame {
 
     public static final int OPORTUNITIES_NUMBER = 2;
-    private final Oportunity[] oportunities;
+    private final Opportunity[] opportunities;
 
     public Frame(){
-        this.oportunities = new Oportunity[OPORTUNITIES_NUMBER];
-        for (int i = 0; i < OPORTUNITIES_NUMBER; i++) oportunities[i] = new Oportunity();
+        this.opportunities = new Opportunity[OPORTUNITIES_NUMBER];
+        for (int i = 0; i < OPORTUNITIES_NUMBER; i++) opportunities[i] = new Opportunity();
     }
 
-    public Oportunity[] getOportunities() {
-        return this.oportunities;
+    public Opportunity[] getOpportunities() {
+        return this.opportunities;
     }
 
-    public int getFrameScore() {
-        return this.oportunities[0].getScore() + this.oportunities[1].getScore();
+    public int getScore() {
+        int score = 0;
+        for (Opportunity opportunity : this.opportunities) score += opportunity.getScore();
+        return score;
     }
 }

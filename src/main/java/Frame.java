@@ -17,4 +17,8 @@ public class Frame {
         for (Opportunity opportunity : this.opportunities) score += opportunity.getScore();
         return score;
     }
+
+    public boolean isStrike() {
+        return this.opportunities[0].getScore() == 10;
+    }
 }

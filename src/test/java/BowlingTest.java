@@ -74,4 +74,16 @@ public class BowlingTest {
             Assert.assertEquals(Bowling.FRAMES_NUMBER * Frame.OPORTUNITIES_NUMBER * scoreByOport, game.getScore());
         }
     }
+
+    @Test
+    public void strikeWhenTheFirstOportunityInTheFrameDrop10Pins() throws Exception {
+        Bowling game = new Bowling();
+        Frame frame = game.getFrames()[0];
+        frame.getOpportunities()[0].setScore(10);
+        Assert.assertEquals(true, frame.isStrike());
+        for (int i = 0; i < 10; i++) {
+            frame.getOpportunities()[0].setScore(i);
+            Assert.assertEquals(false, frame.isStrike());
+        }
+    }
 }

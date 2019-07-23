@@ -103,10 +103,8 @@ public class BowlingTest {
     @Test
     public void checkGameToString() throws Exception {
         Bowling game = new Bowling();
-        //System.out.println(game.toString());
-        //Assert.assertEquals(true, game.toString() instanceof  String);
 
-        //Frame 0
+        //Frame 0, 1, 2, 3, 4 combining spare and strike
         game.getFrames()[0].getRolls()[0].roll(10,false);
         game.getFrames()[0].getRolls()[1].roll(0,false);
         game.getFrames()[1].getRolls()[0].roll(2,true);
@@ -117,8 +115,6 @@ public class BowlingTest {
         game.getFrames()[3].getRolls()[1].roll(1,false);
         game.getFrames()[4].getRolls()[0].roll(5,true);
         game.getFrames()[4].getRolls()[1].roll(2,false);
-        //System.out.println(game.toString());
-        //Assert.assertEquals(true, game.toString() instanceof  String);
 
         //Frame 9
         game.getFrames()[9].getRolls()[0].roll(7,false);
@@ -128,5 +124,31 @@ public class BowlingTest {
         System.out.println(gameResult);
         Assert.assertEquals(true, gameResult instanceof  String);
 
+    }
+
+    @Test
+    public void spareBonusIfInPreviousFrameHas10() throws Exception {
+        Bowling game = new Bowling();
+        game.getFrames()[0].getRolls()[0].roll(5,false);
+        game.getFrames()[0].getRolls()[1].roll(5,false);
+
+        game.getFrames()[1].getRolls()[0].roll(3,game.getFrames()[0].isSPare() || game.getFrames()[0].isStrike());
+        game.getFrames()[1].getRolls()[1].roll(5,game.getFrames()[0].isStrike());
+
+        //5 + 5 + 3*2 + 5 (spare) = 21
+        Assert.assertEquals(21, game.score());
+    }
+
+    @Test
+    public void strikeBonusIfInPreviousFrameHas10() throws Exception {
+        Bowling game = new Bowling();
+        game.getFrames()[0].getRolls()[0].roll(10,false);
+        game.getFrames()[0].getRolls()[1].roll(0,false);
+
+        game.getFrames()[1].getRolls()[0].roll(3,game.getFrames()[0].isSPare() || game.getFrames()[0].isStrike());
+        game.getFrames()[1].getRolls()[1].roll(5,game.getFrames()[0].isStrike());
+
+        //10 + 3*2 + 5*2 (strike) = 26
+        Assert.assertEquals(26, game.score());
     }
 }

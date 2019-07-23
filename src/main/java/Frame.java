@@ -11,4 +11,8 @@ public class Frame {
     public Oportunity[] getOportunities() {
         return this.oportunities;
     }
+
+    public int getFrameScore() {
+        return this.oportunities[0].getScore() + this.oportunities[1].getScore();
+    }
 }

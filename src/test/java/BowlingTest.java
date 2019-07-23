@@ -35,7 +35,7 @@ public class BowlingTest {
     public void frameScoreCantBeNegative() {
         Bowling game = new Bowling();
         Frame frame = game.getFrames()[0];
-        Assert.assertEquals(true, frame.getOportunities()[0].getScore() + frame.getOportunities()[1].getScore() > 0);
+        Assert.assertEquals(true, frame.getFrameScore() > 0);
     }
 
     @Test
@@ -44,6 +44,6 @@ public class BowlingTest {
         Frame frame = game.getFrames()[0];
         frame.getOportunities()[0].setScore(1);
         frame.getOportunities()[1].setScore(1);
-        Assert.assertEquals(2, frame.getOportunities()[0].getScore() + frame.getOportunities()[1].getScore());
+        Assert.assertEquals(2, frame.getFrameScore());
     }
 }

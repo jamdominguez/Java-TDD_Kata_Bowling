@@ -49,4 +49,20 @@ public class FrameTest {
     public void pinsMaxToDropAre10() {
         Assert.assertEquals(10, Frame.MAX_PINS);
     }
+
+    @Test (expected = Exception.class)
+    public void theNumbersOfPinsKnokedCanBeUppderMAX_PINS() throws Exception {
+        Frame frame = new Frame();
+        frame.roll(0, 6, false);
+        frame.roll(1, 6, false);
+        Assert.assertEquals(true, frame.getRolls());
+    }
+
+    @Test (expected = Exception.class)
+    public void ifStrikeCanNotRollAgainInThisFrame() throws Exception {
+        Frame frame = new Frame();
+        frame.roll(0, 10, false);
+        frame.roll(1, 6, false);
+        Assert.assertEquals(true, frame.getRolls());
+    }
 }

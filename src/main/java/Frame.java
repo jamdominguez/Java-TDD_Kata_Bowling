@@ -30,4 +30,10 @@ public class Frame {
     public boolean isSpareOrStrike() {
         return isSPare() || isStrike();
     }
+
+    public void roll(int rollIndex, int pinsDropped, boolean hasBonus) throws Exception {
+        if (rollIndex == 1 && rolls[0].getPinsDropped() == 10 && pinsDropped != 0) throw new Exception("Was a Strike, you can not roll again!");
+        rolls[rollIndex].roll(pinsDropped, hasBonus);
+        if (rolls[0].getPinsDropped() + rolls[1].getPinsDropped() > MAX_PINS) throw new Exception("Not is possible drop more than " + Frame.MAX_PINS + " pins");
+    }
 }

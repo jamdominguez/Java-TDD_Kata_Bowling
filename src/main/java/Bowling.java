@@ -4,7 +4,7 @@ public class Bowling {
     private final Frame[] frames;
     private Roll extraRoll;
 
-    public Bowling(){
+    public Bowling() {
         this.frames = new Frame[FRAMES_NUMBER];
         for (int i = 0; i < FRAMES_NUMBER; i++) frames[i] = new Frame();
     }
@@ -13,22 +13,13 @@ public class Bowling {
         return this.frames;
     }
 
-    /**
-     * @return Total score
-     * @throws Exception
-     */
-    public int score() throws Exception {
+    public int scoreWithBonus() throws Exception {
         int score = 0;
-        for (int i = 0; i < FRAMES_NUMBER ; i++) score += score(i);
+        for (int i = 0; i < FRAMES_NUMBER; i++) score += scoreWithBonus(i);
         return score;
     }
 
-    /**
-     * @param frameIndex
-     * @return The frame score
-     * @throws Exception
-     */
-    public int score(int frameIndex) throws Exception {
+    public int scoreWithBonus(int frameIndex) throws Exception {
         if (frameIndex == FRAMES_NUMBER - 1) {
             return this.frames[frameIndex].score() + getExtraRoll().score();
         } else {
@@ -48,15 +39,16 @@ public class Bowling {
         for (int i = 0; i < FRAMES_NUMBER; i++) {
             try {
                 Roll[] rolls = getFrames()[i].getRolls();
-                sb.append("Frame: ").append(i).append(" Score: ").append(score(i))
+                sb.append("Frame: ").append(i).append(" Score: ").append(scoreWithBonus(i))
                         .append(" roll_0: ").append(rolls[0].getPinsDropped()).append(" roll_1: ").append(rolls[1].getPinsDropped()).append("\n");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (i == FRAMES_NUMBER - 1 && getExtraRoll() != null) sb.append("roll_extra: " + getExtraRoll().getPinsDropped()).append("\n");
+            if (i == FRAMES_NUMBER - 1 && getExtraRoll() != null)
+                sb.append("roll_extra: " + getExtraRoll().getPinsDropped()).append("\n");
         }
         try {
-            sb.append("Total score: " + score());
+            sb.append("Total scoreWithBonus: " + scoreWithBonus());
         } catch (Exception e) {
             e.printStackTrace();
         }

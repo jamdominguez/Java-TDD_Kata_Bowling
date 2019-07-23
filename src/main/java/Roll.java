@@ -1,5 +1,3 @@
-import static javax.swing.text.html.HTML.Tag.STRIKE;
-
 public class Roll {
 
     private int score;

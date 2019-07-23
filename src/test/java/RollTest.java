@@ -3,14 +3,14 @@ import org.junit.Test;
 
 public class RollTest {
 
-    @Test (expected = Exception.class)
+    @Test(expected = Exception.class)
     public void pinsMaxDroppedAre10() throws Exception {
         Roll roll = new Roll();
         roll.roll(11, false);
         Assert.assertEquals("", roll.getPinsDropped());
     }
 
-    @Test (expected = Exception.class)
+    @Test(expected = Exception.class)
     public void pinsDroppedCantBeNegative() throws Exception {
         Roll roll = new Roll();
         roll.roll(-11, false);

@@ -31,7 +31,7 @@ public class BowlingTest {
         }
     }
 
-    @Test (expected = Exception.class)
+    @Test(expected = Exception.class)
     public void scoreCantBeNegative() throws Exception {
         Bowling game = new Bowling();
         Frame frame = game.getFrames()[0];
@@ -69,7 +69,7 @@ public class BowlingTest {
         frames[1].getRolls()[0].roll(4, true);
         frames[1].getRolls()[1].roll(3, false);
         //The second frame: first roll 4 + 4 (by bonus), second roll 3 = 11 points
-        Assert.assertEquals(11, frames[1].score());
+        Assert.assertEquals(11, game.score(1));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class BowlingTest {
         frames[1].getRolls()[0].roll(4, true);
         frames[1].getRolls()[1].roll(3, true);
         //The second frame: first roll 4 + 4 (by bonus), second roll 3 + 3 (by bonus) = 14 points
-        Assert.assertEquals(14, frames[1].score());
+        Assert.assertEquals(14, game.score(1));
     }
 
     @Test
@@ -98,5 +98,20 @@ public class BowlingTest {
         game.getExtraRoll().roll(7, true);
         //The last frame will be frame score plus extraroll;
         Assert.assertEquals(24, game.score(9));
+    }
+
+    @Test
+    public void checkGameToString() throws Exception {
+        Bowling game = new Bowling();
+        System.out.println(game.toString());
+        Assert.assertEquals(true, game.toString() instanceof  String);
+
+        //Frame 0
+        game.getFrames()[0].getRolls()[0].roll(10,false);
+        game.getFrames()[0].getRolls()[1].roll(0,false);
+        game.getFrames()[1].getRolls()[0].roll(2,true);
+        game.getFrames()[1].getRolls()[1].roll(7,true);
+        System.out.println(game.toString());
+        Assert.assertEquals(true, game.toString() instanceof  String);
     }
 }

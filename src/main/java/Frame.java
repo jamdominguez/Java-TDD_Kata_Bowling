@@ -1,5 +1,5 @@
 public class Frame {
-    public Object[] getOportunities() {
-        return new Object[2];
+    public Oportunity[] getOportunities() {
+        return new Oportunity[2];
     }
 }

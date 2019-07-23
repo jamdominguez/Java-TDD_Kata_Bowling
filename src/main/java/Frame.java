@@ -1,24 +1,29 @@
 public class Frame {
 
     public static final int OPORTUNITIES_NUMBER = 2;
-    private final Opportunity[] opportunities;
+    public static final int MAX_PINS = 10;
+    private final Roll[] rolls;
 
     public Frame(){
-        this.opportunities = new Opportunity[OPORTUNITIES_NUMBER];
-        for (int i = 0; i < OPORTUNITIES_NUMBER; i++) opportunities[i] = new Opportunity();
+        this.rolls = new Roll[OPORTUNITIES_NUMBER];
+        for (int i = 0; i < OPORTUNITIES_NUMBER; i++) rolls[i] = new Roll();
     }
 
-    public Opportunity[] getOpportunities() {
-        return this.opportunities;
+    public Roll[] getRolls() {
+        return this.rolls;
     }
 
     public int getScore() {
         int score = 0;
-        for (Opportunity opportunity : this.opportunities) score += opportunity.getScore();
+        for (Roll roll : this.rolls) score += roll.getScore();
         return score;
     }
 
-    public boolean isStrike() {
-        return this.opportunities[0].getScore() == 10;
+    public boolean isStrike() { //the 2 next rolls has double points
+        return this.rolls[0].getPinsDropped() == MAX_PINS;
+    }
+
+    public boolean isSPare() { //the next roll has double points
+        return this.rolls[0].getPinsDropped() != MAX_PINS && this.rolls[0].getPinsDropped() + this.rolls[1].getPinsDropped() == MAX_PINS ;
     }
 }

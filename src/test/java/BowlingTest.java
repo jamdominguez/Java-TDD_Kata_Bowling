@@ -16,37 +16,18 @@ public class BowlingTest {
     }
 
     @Test
-    public void eachFrameHasANotVariableOportunityList() {
+    public void eachFrameHasANotVariableRollList() {
         Bowling game = new Bowling();
         for (Frame frame : game.getFrames()) {
-            Assert.assertEquals(2, frame.getOpportunities().length);
+            Assert.assertEquals(2, frame.getRolls().length);
         }
     }
 
     @Test
-    public void eachFrameHas2Opportunities() {
+    public void eachFrameHas2Rolls() {
         Bowling game = new Bowling();
         for (Frame frame : game.getFrames()) {
-            Assert.assertEquals(true, frame.getOpportunities() instanceof Opportunity[]);
-        }
-    }
-
-    @Test
-    public void frameScoreCantBeNegative() {
-        Bowling game = new Bowling();
-        Frame frame = game.getFrames()[0];
-        System.out.println(frame.getScore());
-        Assert.assertEquals(true, frame.getScore() >= 0);
-    }
-
-    @Test
-    public void frameScoreMustBeOportunitiesScoreAdded() throws Exception {
-        Bowling game = new Bowling();
-        Frame frame = game.getFrames()[0];
-        for (int i = 0; i < 10; i++) {
-            frame.getOpportunities()[0].setScore(i);
-            frame.getOpportunities()[1].setScore(i + 1);
-            Assert.assertEquals(i + i + 1, frame.getScore());
+            Assert.assertEquals(true, frame.getRolls() instanceof Roll[]);
         }
     }
 
@@ -55,8 +36,8 @@ public class BowlingTest {
         Bowling game = new Bowling();
         Frame frame = game.getFrames()[0];
         for (int i = -1; i > -10; i--) {
-            frame.getOpportunities()[0].setScore(i);
-            frame.getOpportunities()[1].setScore(i - 1);
+            frame.getRolls()[0].setScore(i, 0);
+            frame.getRolls()[1].setScore(i - 1, 0);
             Assert.assertEquals(0, frame.getScore());
         }
     }
@@ -66,8 +47,8 @@ public class BowlingTest {
         Bowling game = new Bowling();
         for (int scoreByOport = 0; scoreByOport <= 10; scoreByOport++) {
             for (Frame frame : game.getFrames()) {
-                for (Opportunity opportunity : frame.getOpportunities()) {
-                    opportunity.setScore(scoreByOport);
+                for (Roll roll : frame.getRolls()) {
+                    roll.setScore(scoreByOport, 0);
                 }
             }
             // 1 point x 2 opportunities x 10 frames = 20 points
@@ -75,15 +56,6 @@ public class BowlingTest {
         }
     }
 
-    @Test
-    public void strikeWhenTheFirstOportunityInTheFrameDrop10Pins() throws Exception {
-        Bowling game = new Bowling();
-        Frame frame = game.getFrames()[0];
-        frame.getOpportunities()[0].setScore(10);
-        Assert.assertEquals(true, frame.isStrike());
-        for (int i = 0; i < 10; i++) {
-            frame.getOpportunities()[0].setScore(i);
-            Assert.assertEquals(false, frame.isStrike());
-        }
-    }
+
+
 }

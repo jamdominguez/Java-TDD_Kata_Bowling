@@ -13,13 +13,13 @@ public class Bowling {
         return this.frames;
     }
 
-    public int scoreWithBonus() throws Exception {
+    public int score() throws Exception {
         int score = 0;
-        for (int i = 0; i < FRAMES_NUMBER; i++) score += scoreWithBonus(i);
+        for (int i = 0; i < FRAMES_NUMBER; i++) score += getFrameScore(i);
         return score;
     }
 
-    public int scoreWithBonus(int frameIndex) throws Exception {
+    public int getFrameScore(int frameIndex) throws Exception {
         if (frameIndex == FRAMES_NUMBER - 1) {
             return this.frames[frameIndex].score() + getExtraRoll().score();
         } else {
@@ -35,20 +35,20 @@ public class Bowling {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n     ------ BOWLING ------     ").append("\n");
+        sb.append("\n       -------- BOWLING --------     ").append("\n");
         for (int i = 0; i < FRAMES_NUMBER; i++) {
             try {
                 Roll[] rolls = getFrames()[i].getRolls();
-                sb.append("Frame: ").append(i).append(" Score: ").append(scoreWithBonus(i))
-                        .append(" roll_0: ").append(rolls[0].getPinsDropped()).append(" roll_1: ").append(rolls[1].getPinsDropped()).append("\n");
+                sb.append("Frame: ").append(i).append(" Score: ").append(getFrameScore(i))
+                        .append("   roll_0: ").append(rolls[0].getPinsDropped()).append("   roll_1: ").append(rolls[1].getPinsDropped());
+                if (i == FRAMES_NUMBER - 1 && getExtraRoll() != null) sb.append("   roll_extra: ").append(getExtraRoll().getPinsDropped());
+                sb.append("\n");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (i == FRAMES_NUMBER - 1 && getExtraRoll() != null)
-                sb.append("roll_extra: " + getExtraRoll().getPinsDropped()).append("\n");
         }
         try {
-            sb.append("Total scoreWithBonus: " + scoreWithBonus());
+            sb.append("          Your score: ").append(score()).append("!!!!");
         } catch (Exception e) {
             e.printStackTrace();
         }

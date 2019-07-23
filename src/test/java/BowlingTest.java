@@ -54,7 +54,7 @@ public class BowlingTest {
                 }
             }
             // 1 point x 2 opportunities x 10 frames = 20 points
-            Assert.assertEquals(Bowling.FRAMES_NUMBER * Frame.OPORTUNITIES_NUMBER * pins, game.scoreWithBonus());
+            Assert.assertEquals(Bowling.FRAMES_NUMBER * Frame.OPORTUNITIES_NUMBER * pins, game.score());
         }
     }
 
@@ -70,7 +70,7 @@ public class BowlingTest {
         frames[1].getRolls()[0].roll(4, true);
         frames[1].getRolls()[1].roll(3, false);
         //The second frame: first roll 4 + 4 (by bonus), second roll 3 = 11 points
-        Assert.assertEquals(11, game.scoreWithBonus(1));
+        Assert.assertEquals(11, game.getFrameScore(1));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class BowlingTest {
         frames[1].getRolls()[0].roll(4, true);
         frames[1].getRolls()[1].roll(3, true);
         //The second frame: first roll 4 + 4 (by bonus), second roll 3 + 3 (by bonus) = 14 points
-        Assert.assertEquals(14, game.scoreWithBonus(1));
+        Assert.assertEquals(14, game.getFrameScore(1));
     }
 
     @Test
@@ -95,8 +95,8 @@ public class BowlingTest {
         frames[9].getRolls()[0].roll(10, false);
         frames[9].getRolls()[1].roll(0, false);
         game.getExtraRoll().roll(7, true);
-        //The last frame will be frame scoreWithBonus plus extraroll;
-        Assert.assertEquals(24, game.scoreWithBonus(9));
+        //The last frame will be frame getFrameScore plus extraroll;
+        Assert.assertEquals(24, game.getFrameScore(9));
     }
 
     @Test
@@ -133,7 +133,7 @@ public class BowlingTest {
         game.getFrames()[1].getRolls()[1].roll(5, game.getFrames()[0].isStrike());
 
         //5 + 5 + 3*2 + 5 (spare) = 21
-        Assert.assertEquals(21, game.scoreWithBonus());
+        Assert.assertEquals(21, game.score());
     }
 
     @Test
@@ -144,6 +144,6 @@ public class BowlingTest {
         game.getFrames()[1].getRolls()[1].roll(5, game.getFrames()[0].isStrike());
 
         //10 + 3*2 + 5*2 (strike) = 26
-        Assert.assertEquals(26, game.scoreWithBonus());
+        Assert.assertEquals(26, game.score());
     }
 }

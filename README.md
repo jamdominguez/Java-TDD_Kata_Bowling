@@ -1,7 +1,7 @@
 # Java-TDD_Kata_Bowling
 Simple java local application, using Test Driven Development methodology.
 
-**Level: EASY**
+**Level: MEDIUM**
 
 Setup:
  - JDK 1.8.0_191
